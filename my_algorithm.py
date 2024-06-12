@@ -12,6 +12,22 @@ def permute(input_bits, permutation_table):
 
     return output_bits
 
+def expand_16_to_32_bit(bin_str):
+    if len(bin_str) != 16 or not all(c in '01' for c in bin_str):
+        raise ValueError("Input must be a 16-bit binary string.")
+    
+    # Mapping based on the provided table
+    mapping = [
+        31, 0, 1, 2, 3, 4, 5, 8,
+        9, 10, 11, 12, 13, 16, 17, 18,
+        19, 20, 21, 24, 25, 26, 27, 28,
+        29, 30, 31, 30, 29, 28, 27, 0
+    ]
+    
+    expanded_bin_str = ''.join(bin_str[mapping[i] % 16] for i in range(32))
+    
+    return expanded_bin_str
+
 
 def permute_32bit(input_32, permutation_table):
     output_32 = 0
@@ -127,8 +143,8 @@ def key_gen(last_key, factor):
     key_chunks = split_to_n_bit_chunks(last_key, 32, 16)
     left_key_rotated = rotate_left(key_chunks[0], factor)
     right_key_rotated = rotate_left(key_chunks[1], factor)
-    xor_two_chunks = bstr_xor(right_key_rotated, left_key_rotated)
-    return xor_two_chunks, add_modulo(factor, "1", 32)
+    xor_two_chunks = left_zero_pad(bstr_xor(right_key_rotated, left_key_rotated),16)
+    return expand_16_to_32_bit(xor_two_chunks), add_modulo(factor, "1", 32)
 
 
 def round_func(input_string, key_round, i, sbox_list):
