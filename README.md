@@ -30,7 +30,8 @@ This function splits the input into two parts, shifts it to the right by i, and 
 ## Example
 ### input:
 
-Computers are good at following instructions, but not at reading your mind.
+    Computers are good at following instructions, but not at reading your mind.
+
 
 ### binary output:
 
