@@ -39,3 +39,5 @@ This function splits the input into two parts, shifts it to the right by i, and 
 
 ### hex output:
 0xc154ca90ec9c996d1d90df29911e6574a2c5ab0b60ad48e7a495cf4f280c2f5022e8ae796a4d829bcf2fa824312396ad218c6d05dbe6bc518da694efb9d0abf1009524fb17f24c2b5d29fabd6590d843
+
+# sboxes are taken form [this repository:]([url)](https://github.com/prophet6250/blowfish-implementation) 
